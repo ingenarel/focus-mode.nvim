@@ -1,29 +1,29 @@
-local m = { focusModeOn = false }
+local m = { focusModeOn = false, firstinit = { foldcolumn = vim.opt.foldcolumn._value } }
 
 function m.toggle()
 	if m.focusModeOn then
 		m.focusModeOn = false
-		vim.opt_local.foldcolumn = "auto"
-		vim.opt_local.colorcolumn = "+0,-20,-40"
-		vim.opt_local.number = true
-		vim.opt_local.relativenumber = true
-		vim.opt_local.signcolumn = "auto"
-		vim.opt_local.cursorcolumn = true
-		vim.opt_local.cursorline = true
-		vim.opt_local.laststatus = 3
+		vim.opt.foldcolumn = "auto"
+		vim.opt.colorcolumn = "+0,-20,-40"
+		vim.opt.number = true
+		vim.opt.relativenumber = true
+		vim.opt.signcolumn = "auto"
+		vim.opt.cursorcolumn = true
+		vim.opt.cursorline = true
+		vim.opt.laststatus = 3
 		require("ibl").update({ enabled = true })
 		-- vim.diagnostic.config{virtual_text=true}
 		vim.fn.system({ "tmux", "set", "-g", "status", "on" })
 	else
 		m.focusModeOn = true
-		vim.opt_local.foldcolumn = "0"
-		vim.opt_local.colorcolumn = ""
-		vim.opt_local.number = false
-		vim.opt_local.relativenumber = false
-		vim.opt_local.signcolumn = "no"
-		vim.opt_local.cursorcolumn = false
-		vim.opt_local.cursorline = false
-		vim.opt_local.laststatus = 0
+		vim.opt.foldcolumn = "0"
+		vim.opt.colorcolumn = ""
+		vim.opt.number = false
+		vim.opt.relativenumber = false
+		vim.opt.signcolumn = "no"
+		vim.opt.cursorcolumn = false
+		vim.opt.cursorline = false
+		vim.opt.laststatus = 0
 		require("ibl").update({ enabled = false })
 		-- TODO: fix this; this is probably fucking crashing clangd
 		-- vim.diagnostic.config{virtual_text=false}
