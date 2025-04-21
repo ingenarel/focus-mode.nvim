@@ -1,16 +1,28 @@
-local m = { focusModeOn = false, firstinit = { foldcolumn = vim.opt.foldcolumn._value } }
+local m = {
+	focusModeOn = false,
+	firstinit = {
+		foldcolumn = vim.opt.foldcolumn._value,
+		colorcolumn = vim.opt.colorcolumn._value,
+		number = vim.opt.number._value,
+		relativenumber = vim.opt.relativenumber._value,
+		signcolumn = vim.opt.signcolumn._value,
+		cursorcolumn = vim.opt.cursorcolumn._value,
+		cursorline = vim.opt.cursorline._value,
+		laststatus = vim.opt.laststatus._value,
+	},
+}
 
 function m.toggle()
 	if m.focusModeOn then
 		m.focusModeOn = false
-		vim.opt.foldcolumn = "auto"
-		vim.opt.colorcolumn = "+0,-20,-40"
-		vim.opt.number = true
-		vim.opt.relativenumber = true
-		vim.opt.signcolumn = "auto"
-		vim.opt.cursorcolumn = true
-		vim.opt.cursorline = true
-		vim.opt.laststatus = 3
+		vim.opt.foldcolumn = m.firstinit.foldcolumn
+		vim.opt.colorcolumn = m.firstinit.colorcolumn
+		vim.opt.number = m.firstinit.number
+		vim.opt.relativenumber = m.firstinit.relativenumber
+		vim.opt.signcolumn = m.firstinit.signcolumn
+		vim.opt.cursorcolumn = m.firstinit.cursorcolumn
+		vim.opt.cursorline = m.firstinit.cursorline
+		vim.opt.laststatus = m.firstinit.laststatus
 		require("ibl").update({ enabled = true })
 		-- vim.diagnostic.config{virtual_text=true}
 		vim.fn.system({ "tmux", "set", "-g", "status", "on" })
