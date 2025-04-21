@@ -25,7 +25,9 @@ function m.toggle()
 		vim.opt.laststatus = m.firstinit.laststatus
 		require("ibl").update({ enabled = true })
 		-- vim.diagnostic.config{virtual_text=true}
-		vim.fn.system({ "tmux", "set", "-g", "status", "on" })
+		if os.getenv("TMUX") then
+			vim.fn.system({ "tmux", "set", "-g", "status", "on" })
+		end
 	else
 		m.focusModeOn = true
 		vim.opt.foldcolumn = "0"
@@ -39,7 +41,9 @@ function m.toggle()
 		require("ibl").update({ enabled = false })
 		-- TODO: fix this; this is probably fucking crashing clangd
 		-- vim.diagnostic.config{virtual_text=false}
-		vim.fn.system({ "tmux", "set", "-g", "status", "off" })
+		if os.getenv("TMUX") then
+			vim.fn.system({ "tmux", "set", "-g", "status", "off" })
+		end
 	end
 end
 
